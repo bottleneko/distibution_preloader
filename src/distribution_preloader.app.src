@@ -1,0 +1,14 @@
+{application, distribution_preloader,
+ [{description, "An OTP application"},
+  {vsn, "0.1.0"},
+  {mod, {distribution_preloader_app, []}},
+  {applications,
+   [kernel,
+    stdlib,
+    nodefinder
+   ]},
+  {env,
+   [{cluster_wait_trashhold_seconds, 60},
+    {cluster_size, 3}
+   ]}
+ ]}.
