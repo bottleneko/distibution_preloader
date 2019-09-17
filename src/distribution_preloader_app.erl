@@ -13,12 +13,12 @@
 %%%===================================================================
 
 start(_StartType, _StartArgs) ->
-  {ok, ClusterWaitTresholdSeconds} = application:get_env(cluster_wait_treshold_seconds),
+  {ok, ClusterWaitThresholdSeconds} = application:get_env(cluster_wait_threshold_seconds),
   {ok, ClusterSize} = application:get_env(cluster_size),
 
   net_kernel:monitor_nodes(true, ?NET_KERNEL_MONITOR_NODES_OPTIONS),
 
-  waiting_nodes_loop(ClusterWaitTresholdSeconds * ?MILLISECONDS_IN_SECOND, ClusterSize),
+  wait_nodes_loop(ClusterWaitThresholdSeconds * ?MILLISECONDS_IN_SECOND, ClusterSize),
   decs_distribution_preloader_sup:start_link().
 
 stop(_State) ->
@@ -28,7 +28,7 @@ stop(_State) ->
 %%% Internal functions
 %%%===================================================================
 
-waiting_nodes_loop(ClusterWaitTresholdMillisecond, ClusterSize) ->
+wait_nodes_loop(ClusterWaitThresholdMillisecond, ClusterSize) ->
   receive
     {nodeup, _Node, ?NET_KERNEL_MONITOR_NODES_OPTIONS} ->
       AllNodes = all_nodes(),
@@ -37,11 +37,11 @@ waiting_nodes_loop(ClusterWaitTresholdMillisecond, ClusterSize) ->
           flush(),
           ok;
          true ->
-          waiting_nodes_loop(ClusterWaitTresholdMillisecond, ClusterSize)
+          wait_nodes_loop(ClusterWaitThresholdMillisecond, ClusterSize)
       end;
     _Any ->
-      waiting_nodes_loop(ClusterWaitTresholdMillisecond, ClusterSize)
-  after ClusterWaitTresholdMillisecond ->
+      wait_nodes_loop(ClusterWaitThresholdMillisecond, ClusterSize)
+  after ClusterWaitThresholdMillisecond ->
       exit({preloading_fail, {nodes_in_cluster, [all_nodes()]}})
   end.
 

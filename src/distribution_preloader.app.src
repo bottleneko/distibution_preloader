@@ -8,7 +8,7 @@
     nodefinder
    ]},
   {env,
-   [{cluster_wait_trashhold_seconds, 60},
+   [{cluster_wait_threshold_seconds, 60},
     {cluster_size, 3}
    ]}
  ]}.

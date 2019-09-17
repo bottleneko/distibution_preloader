@@ -33,7 +33,7 @@ In your *.app.src
 In your sys.config
 ```erlang
 {distribution_preloader,
- [{cluster_wait_trashhold_seconds, 60}, % maximum time for waiting cluster in seconds
+ [{cluster_wait_threshold_seconds, 60}, % maximum time for waiting cluster in seconds
   {cluster_size, 3}                     % if your app requires at least 3 nodes for start
  ]}.
 ```
