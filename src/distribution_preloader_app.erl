@@ -19,7 +19,7 @@ start(_StartType, _StartArgs) ->
   net_kernel:monitor_nodes(true, ?NET_KERNEL_MONITOR_NODES_OPTIONS),
 
   wait_nodes_loop(ClusterWaitThresholdSeconds * ?MILLISECONDS_IN_SECOND, ClusterSize),
-  decs_distribution_preloader_sup:start_link().
+  distribution_preloader_sup:start_link().
 
 stop(_State) ->
   ok.
