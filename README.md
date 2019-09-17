@@ -36,4 +36,8 @@ In your sys.config
  [{cluster_wait_threshold_seconds, 60}, % maximum time for waiting cluster in seconds
   {cluster_size, 3}                     % if your app requires at least 3 nodes for start
  ]}.
+
+{nodefinder,
+ [{if_name, <<"eth0">>} % if you have internal internal network eth0 for distribution
+ ]}.
 ```

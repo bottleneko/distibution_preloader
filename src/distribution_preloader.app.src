@@ -1,5 +1,5 @@
 {application, distribution_preloader,
- [{description, "An OTP application"},
+ [{description, "Distribution preloader"},
   {vsn, "0.1.0"},
   {mod, {distribution_preloader_app, []}},
   {applications,
